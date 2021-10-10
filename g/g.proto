@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package g;
+
+message G {
+  string id = 1;
+  string pid = 2;
+  string name = 3;
+  string power = 4;
+  string description = 5;
+}
+
+message CreateGRequest {
+  G g = 1;
+}
+
+message CreateGResponse {
+  G g = 1; // will have a g id
+}
+
+message ReadGRequest {
+  string pid = 1;
+}
+
+message ReadGResponse {
+  Pokemon g = 1;
+}
+
+message UpdateGRequest {
+  Pokemon g = 1;
+}
+
+message UpdateGResponse {
+  Pokemon g = 1;
+}
+
+message DeleteGRequest {
+  string pid = 1;
+}
+
+message DeleteGResponse {
+  string pid = 1;
+}
+
+message ListGRequest {
+
+}
+
+message ListGResponse {
+  G g = 1;
+}
+
+service GService {
+  rpc CreateG (CreateGRequest) returns (CreateGResponse);
+  rpc ReadG (ReadGRequest) returns (ReadGResponse); // return NOT_FOUND if not found
+  rpc UpdateG (UpdateGRequest) returns (UpdateGResponse); // return NOT_FOUND if not found
+  rpc DeleteG (DeleteGRequest) returns (DeleteGResponse); // return NOT_FOUND if not found
+  rpc ListG (ListGRequest) returns (stream ListGResponse); // For Sever Streaming
+}
